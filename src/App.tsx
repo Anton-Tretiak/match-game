@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Game } from './Components/Game/Game';
+import { MatchGame } from './Components/MatchGame/MatchGame';
 
 export function App() {
   return (
     <div className="App">
-      <Game />
+      <MatchGame />
     </div>
   );
 }
