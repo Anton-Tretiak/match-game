@@ -8,6 +8,8 @@ type Props = {
   matchesRemaining: number;
   aiAmount: number;
   onAIMove: (aiMove: number) => void;
+  customMatchesRemaining: number;
+  customNMatches: number;
 };
 
 export const AI: React.FC<Props> = (
@@ -16,16 +18,33 @@ export const AI: React.FC<Props> = (
     matchesRemaining,
     onAIMove,
     aiAmount,
+    customMatchesRemaining,
+    customNMatches
   }) => {
   const makeMove = () => {
     const remainingMatches = matchesRemaining;
-    const maxMatches = Math.min(remainingMatches, 3);
+    let maxMatches;
     let aiMove = 1;
     
-    for (let i = 2; i <= maxMatches; i++) {
-      if ((remainingMatches - i) % (i + 1) === 0) {
-        aiMove = i;
-        break;
+    if (customMatchesRemaining === 0 || customNMatches === 0) {
+      maxMatches = Math.min(remainingMatches, 3);
+    } else {
+      maxMatches = Math.min(remainingMatches, customNMatches);
+    }
+    
+    console.log(customMatchesRemaining);
+    console.log(maxMatches);
+    
+    if (remainingMatches <= maxMatches) {
+      aiMove = remainingMatches;
+    } else if ((remainingMatches - 1) % (maxMatches + 1) === 0) {
+      aiMove = 1;
+    } else {
+      for (let i = 2; i <= maxMatches; i++) {
+        if ((remainingMatches - i) % (maxMatches + 1) === 0) {
+          aiMove = i;
+          break;
+        }
       }
     }
     

@@ -16,6 +16,8 @@ export const MatchGame: React.FC = () => {
   const [aiAmount, setAIAmount] = useState(0);
   // settings states
   const [selectedStarter, setSelectedStarter] = useState('You');
+  const [customMatchesRemaining, setCustomMatchesRemaining] = useState(0);
+  const [customNMatches, setCustomNMatches] = useState(0);
   
   const handleUserMove = (userMove: number) => {
     setMatchesRemaining(matchesRemaining - userMove);
@@ -33,16 +35,42 @@ export const MatchGame: React.FC = () => {
     setSelectedStarter(event.target.value);
   };
   
+  const handleCustomMatches = (num: number) => {
+    setMatchesRemaining(num);
+    setCustomMatchesRemaining(num);
+  };
+  
+  const handleSettingNMatches = (num: number) => {
+    setCustomNMatches(num);
+  };
+  
+  const handleResetCustomSettings = () => {
+    setMatchesRemaining(25);
+    setCustomMatchesRemaining(0);
+    setCustomNMatches(0);
+    setPlayerAmount(0);
+    setAIAmount(0);
+    setCurrentPlayer(CurrentPlayer.None);
+  };
+  
+  console.log(matchesRemaining);
+  
   const renderMatches = () => {
     const matchSymbol = '📍';
     if (matchesRemaining > 0) {
       const matches = matchSymbol.repeat(matchesRemaining);
+      
       return <div className="matches">{matches}</div>;
     }
   };
   
   const clearStates = () => {
-    setMatchesRemaining(25);
+    if (customMatchesRemaining > 0) {
+      setMatchesRemaining(customMatchesRemaining);
+    } else {
+      setMatchesRemaining(25);
+    }
+    
     setCurrentPlayer(CurrentPlayer.None);
     setPlayerAmount(0);
     setAIAmount(0);
@@ -96,7 +124,11 @@ export const MatchGame: React.FC = () => {
                       setCurrentPlayer(CurrentPlayer.AI);
                     }
                   }}
-                  disabled={matchesRemaining === 25}
+                  disabled={
+                    customMatchesRemaining === 0
+                      ? matchesRemaining === 25
+                      : matchesRemaining === customMatchesRemaining
+                  }
                 >
                   Restart
                 </button>
@@ -109,6 +141,8 @@ export const MatchGame: React.FC = () => {
           matchesRemaining={matchesRemaining}
           aiAmount={aiAmount}
           onAIMove={handleAIMove}
+          customMatchesRemaining={customMatchesRemaining}
+          customNMatches={customNMatches}
         />
       </div>
       
@@ -116,6 +150,11 @@ export const MatchGame: React.FC = () => {
         <GameSettings
           selectedStarter={selectedStarter}
           onStarterChoose={handleStarterChoose}
+          customMatchesRemaining={customMatchesRemaining}
+          handleCustomMatches={handleCustomMatches}
+          handleSettingNMatches={handleSettingNMatches}
+          handleResetCustomSettings={handleResetCustomSettings}
+          customNMatches={customNMatches}
         />
         
         <Info />
