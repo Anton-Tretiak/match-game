@@ -9,9 +9,7 @@ type Props = {
   currentPlayer: CurrentPlayer;
   matchesRemaining: number;
   playerAmount: number;
-  activeButton: number;
   onUserMove: (userMove: number) => void;
-  onMatchButtonClick: (id: number) => void;
 };
 export const Player: React.FC<Props> = (
   {
@@ -19,8 +17,6 @@ export const Player: React.FC<Props> = (
     matchesRemaining,
     currentPlayer,
     playerAmount,
-    activeButton,
-    onMatchButtonClick
   }) => {
   return (
     <div className='player content'>
@@ -32,8 +28,6 @@ export const Player: React.FC<Props> = (
         currentPlayer={currentPlayer}
         onUserMove={onUserMove}
         matchesRemaining={matchesRemaining}
-        activeButton={activeButton}
-        onMatchButtonClick={onMatchButtonClick}
       />
       
       <span>Amount of mathches: {playerAmount}</span>

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './AI.scss';
 
 import { CurrentPlayer } from '../../Types/CurrentPlayer';
@@ -18,22 +18,21 @@ export const AI: React.FC<Props> = (
     aiAmount,
   }) => {
   const makeMove = () => {
+    const remainingMatches = matchesRemaining;
+    const maxMatches = Math.min(remainingMatches, 3);
     let aiMove = 1;
     
-    if ((matchesRemaining - 1) % 4 === 0) {
-      aiMove = 1;
-    } else if ((matchesRemaining - 2) % 4 === 0) {
-      aiMove = 2;
-    } else if ((matchesRemaining - 3) % 4 === 0) {
-      aiMove = 3;
-    } else {
-      // No winning move, so choose randomly
-      const possibleMoves = [1, 2, 3];
-      aiMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
+    for (let i = 2; i <= maxMatches; i++) {
+      if ((remainingMatches - i) % (i + 1) === 0) {
+        aiMove = i;
+        break;
+      }
     }
     
     setTimeout(() => {
-      onAIMove(aiMove);
+      if (matchesRemaining > 0) {
+        onAIMove(aiMove);
+      }
     }, 1000);
   };
   

@@ -1,11 +1,10 @@
 import React from 'react';
 
 type Props = {
-  playerAmount: number;
   aiAmount: number;
   clearStates: () => void;
 };
-export const GameEnd: React.FC<Props> = ({ clearStates, playerAmount, aiAmount }) => {
+export const GameEnd: React.FC<Props> = ({ clearStates, aiAmount }) => {
   return (
     <div className='game__end'>
       {aiAmount % 2 === 0
