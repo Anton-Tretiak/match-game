@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './MatchGame.scss';
 
 import {CurrentPlayer} from '../../Types/CurrentPlayer';
 
-import { Player } from '../Player/Player';
-import { AI } from '../AI/AI';
-import { GameEnd } from '../GameEnd/GameEnd';
-import { GameSettings } from '../GameSettings/GameSettings';
+import {Player} from '../Player/Player';
+import {AI} from '../AI/AI';
+import {GameEnd} from '../GameEnd/GameEnd';
+import {GameSettings} from '../GameSettings/GameSettings';
+import {Info} from '../Info/Info';
 
 export const MatchGame: React.FC = () => {
   const [matchesRemaining, setMatchesRemaining] = useState(25);
   const [currentPlayer, setCurrentPlayer] = useState<CurrentPlayer>(CurrentPlayer.None);
   const [playerAmount, setPlayerAmount] = useState(0);
   const [aiAmount, setAIAmount] = useState(0);
+  // settings states
+  const [selectedStarter, setSelectedStarter] = useState('You');
   
   const handleUserMove = (userMove: number) => {
     setMatchesRemaining(matchesRemaining - userMove);
@@ -24,6 +27,10 @@ export const MatchGame: React.FC = () => {
     setMatchesRemaining(matchesRemaining - aiMove);
     setAIAmount(aiAmount + aiMove);
     setCurrentPlayer(CurrentPlayer.User);
+  };
+  
+  const handleStarterChoose = (event:  React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedStarter(event.target.value);
   };
   
   const renderMatches = () => {
@@ -67,7 +74,13 @@ export const MatchGame: React.FC = () => {
               {currentPlayer === CurrentPlayer.None ? (
                 <button
                   className='button is-success'
-                  onClick={() => setCurrentPlayer(CurrentPlayer.User)}
+                  onClick={() => {
+                    if (selectedStarter === 'You') {
+                      setCurrentPlayer(CurrentPlayer.User);
+                    } else {
+                      setCurrentPlayer(CurrentPlayer.AI);
+                    }
+                  }}
                 >
                   Start
                 </button>
@@ -76,7 +89,12 @@ export const MatchGame: React.FC = () => {
                   className='button is-success'
                   onClick={() => {
                     clearStates();
-                    setCurrentPlayer(CurrentPlayer.User)
+                    
+                    if (selectedStarter === 'You') {
+                      setCurrentPlayer(CurrentPlayer.User);
+                    } else {
+                      setCurrentPlayer(CurrentPlayer.AI);
+                    }
                   }}
                   disabled={matchesRemaining === 25}
                 >
@@ -92,6 +110,15 @@ export const MatchGame: React.FC = () => {
           aiAmount={aiAmount}
           onAIMove={handleAIMove}
         />
+      </div>
+      
+      <div className='additional'>
+        <GameSettings
+          selectedStarter={selectedStarter}
+          onStarterChoose={handleStarterChoose}
+        />
+        
+        <Info />
       </div>
     </>
   );

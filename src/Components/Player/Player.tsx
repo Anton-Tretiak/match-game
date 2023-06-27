@@ -20,7 +20,7 @@ export const Player: React.FC<Props> = (
   }) => {
   return (
     <div className='player content'>
-      <h3>Player 👨</h3>
+      <h3>You 🧑</h3>
       
       <span>Take matches:</span>
       
