@@ -1,0 +1,24 @@
+.game {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+  border-bottom: 3px solid #d7d6d6;
+  
+  &__heading {
+    margin-top: 0;
+  }
+  
+  &__info {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  &__end {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.matches {
+  margin-bottom: 10px;
+}
