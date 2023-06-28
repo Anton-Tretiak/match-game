@@ -1,6 +1,8 @@
 # Match Game
 
-This project was written with ReactJS
+This project was written with ReactJS     
+Here is the link to game:
+https://match-game44.netlify.app/
 
 ## Available Scripts
 
