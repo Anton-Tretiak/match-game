@@ -4,7 +4,7 @@ type Props = {
   aiAmount: number;
   clearStates: () => void;
 };
-export const GameEnd: React.FC<Props> = ({ clearStates, aiAmount }) => {
+export const GameEnd: React.FC<Props> = ({ aiAmount, clearStates }) => {
   return (
     <div className='game__end'>
       {aiAmount % 2 === 0

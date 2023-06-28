@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './MatchGame.scss';
 
-import {CurrentPlayer} from '../../Types/CurrentPlayer';
+import { CurrentPlayer } from '../../Types/CurrentPlayer';
 
-import {Player} from '../Player/Player';
-import {AI} from '../AI/AI';
-import {GameEnd} from '../GameEnd/GameEnd';
-import {GameSettings} from '../GameSettings/GameSettings';
-import {Info} from '../Info/Info';
+import { Player } from '../Player/Player';
+import { AI } from '../AI/AI';
+import { GameEnd } from '../GameEnd/GameEnd';
+import { GameSettings } from '../GameSettings/GameSettings';
+import { Info } from '../Info/Info';
 
 export const MatchGame: React.FC = () => {
   const [matchesRemaining, setMatchesRemaining] = useState(25);
@@ -53,8 +53,6 @@ export const MatchGame: React.FC = () => {
     setCurrentPlayer(CurrentPlayer.None);
   };
   
-  console.log(matchesRemaining);
-  
   const renderMatches = () => {
     const matchSymbol = '📍';
     if (matchesRemaining > 0) {
@@ -84,6 +82,8 @@ export const MatchGame: React.FC = () => {
           matchesRemaining={matchesRemaining}
           playerAmount={playerAmount}
           onUserMove={handleUserMove}
+          customMatchesRemaining={customMatchesRemaining}
+          customNMatches={customNMatches}
         />
         
         {matchesRemaining === 0
@@ -150,10 +150,10 @@ export const MatchGame: React.FC = () => {
         <GameSettings
           selectedStarter={selectedStarter}
           onStarterChoose={handleStarterChoose}
-          customMatchesRemaining={customMatchesRemaining}
           handleCustomMatches={handleCustomMatches}
           handleSettingNMatches={handleSettingNMatches}
           handleResetCustomSettings={handleResetCustomSettings}
+          customMatchesRemaining={customMatchesRemaining}
           customNMatches={customNMatches}
         />
         

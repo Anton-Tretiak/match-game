@@ -11,8 +11,8 @@ type Props = {
 
 export const ButtonGroup: React.FC<Props> = (
   {
-    onUserMove,
     currentPlayer,
+    onUserMove,
     matchesRemaining,
   }) => {
   return (

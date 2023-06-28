@@ -16,8 +16,8 @@ export const AI: React.FC<Props> = (
   {
     currentPlayer,
     matchesRemaining,
-    onAIMove,
     aiAmount,
+    onAIMove,
     customMatchesRemaining,
     customNMatches
   }) => {
@@ -31,9 +31,6 @@ export const AI: React.FC<Props> = (
     } else {
       maxMatches = Math.min(remainingMatches, customNMatches);
     }
-    
-    console.log(customMatchesRemaining);
-    console.log(maxMatches);
     
     if (remainingMatches <= maxMatches) {
       aiMove = remainingMatches;
@@ -52,7 +49,7 @@ export const AI: React.FC<Props> = (
       if (matchesRemaining > 0) {
         onAIMove(aiMove);
       }
-    }, 1000);
+    }, 1500);
   };
   
   useEffect(() => {
@@ -63,7 +60,9 @@ export const AI: React.FC<Props> = (
   
   return (
     <div className='ai content'>
-      <h3>AI 🤖</h3>
+      <h3 id={currentPlayer === CurrentPlayer.AI ? 'ai__active' : ''}>
+        AI 🤖
+      </h3>
       
       <span>Take matches:</span>
       

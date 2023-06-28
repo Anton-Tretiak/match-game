@@ -31,7 +31,6 @@ export const GameSettings: React.FC<Props> = (
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     
-    // form submission logic
     console.log('All Matches:', matches);
     console.log('Max to take matches:', matchesToTake);
     
@@ -67,7 +66,8 @@ export const GameSettings: React.FC<Props> = (
               <input
                 className="input"
                 type="number"
-                value={matches}
+                placeholder='Enter a number'
+                value={matches !== 0 ? matches : ''}
                 onChange={(e) => setMatches(Number(e.target.value))}
                 required
               />
@@ -80,7 +80,8 @@ export const GameSettings: React.FC<Props> = (
               <input
                 className="input"
                 type="number"
-                value={matchesToTake}
+                placeholder='Enter a number'
+                value={matchesToTake !== 0 ? matchesToTake : ''}
                 onChange={(e) => setMatchesToTake(Number(e.target.value))}
                 required
               />
