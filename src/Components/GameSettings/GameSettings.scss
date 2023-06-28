@@ -1,0 +1,15 @@
+.settings {
+  &__first-move {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  &__custom-game {
+    margin-top: 20px;
+  }
+  
+  &__reset-button {
+    margin-top: 10px;
+  }
+}
